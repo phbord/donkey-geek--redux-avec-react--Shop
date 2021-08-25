@@ -5,9 +5,11 @@ import phone from 'assets/img/phone.png';
 import { buyPhone } from 'redux/phone/actionPhone';
 
 const PhoneContainer = () => {
-  const phones = useSelector(state => state.phones)
+  const [totalPhone, setTotalPhone] = React.useState(1)
+  const phones = useSelector(state => state.phone.phones)
   const dispatch = useDispatch()
   console.log('phones: ', phones)
+  console.log('totalPhone: ', totalPhone)
 
   return (<div>
     <img src={phone} alt="phone" />
@@ -15,22 +17,16 @@ const PhoneContainer = () => {
       Disponibilité : 
       <span id="count"> {phones}</span>
     </p>
-    <button type="button" 
-            onClick={() => dispatch(buyPhone())}
-            className="btn btn-secondary">Acheter</button>
+    <div className="d-flex">
+      <button type="button" 
+              onClick={() => dispatch(buyPhone(totalPhone))}
+              className="btn btn-secondary me-2">Acheter</button>
+      <input type="text" 
+              value={totalPhone}
+              className="d-inline-block"
+              onChange={e => setTotalPhone(e.target.value)} />
+    </div>
   </div>);
-};
-
-const mapStateToProps = (state) => {
-  return {
-    phones: state.phone.phones
-  }
-};
-
-const matDispatchToProps = (dispatch) => {
-  return {
-    buyPhone: () => dispatch(buyPhone())
-  }
 };
 
 export default PhoneContainer;

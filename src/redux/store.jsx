@@ -4,19 +4,20 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import phoneReducer from 'redux/phone/reducerPhone'
 import tvReducer from 'redux/tv/reducerTv'
+import commentReducer from './comments/reducerComments';
 
 const rootReducer = combineReducers({
   phone: phoneReducer,
   television: tvReducer,
-  //comments: commentReducer
+  comments: commentReducer
 })
 
 const store = createStore(
   rootReducer,
-  // compose(
-  //   applyMiddleware(...middleware),
-  //   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  // )
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 )
 
 export default store;

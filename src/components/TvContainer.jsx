@@ -5,7 +5,7 @@ import tele from 'assets/img/tv.png'
 import { buyTv } from 'redux/tv/actionTv';
 
 const TvContainer = () => {
-  const tv = useSelector(state => state.tv)
+  const tv = useSelector(state => state.television.tv)
   const dispatch = useDispatch()
   console.log('tv: ', tv)
 
